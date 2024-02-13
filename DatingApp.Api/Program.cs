@@ -1,4 +1,5 @@
 using Data.Context;
+using IOC.Dependencies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,12 +7,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+#region add services
+
+builder.Services.RegisterServices();
+
+#endregion
+
 #region add db context
 
 builder.Services.AddDbContext<DatingAppContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DatingAppConnectionString"));
 });
+#endregion
 
 var app = builder.Build();
 

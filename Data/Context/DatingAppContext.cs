@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Entities.User;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,14 @@ namespace Data.Context
         #region Constructor
 
         public DatingAppContext(DbContextOptions<DatingAppContext> options) : base(options) { }
-        
+
         #endregion
+
+        #region Users
+
+        public DbSet<User> Users { get; set; }
+
+        #endregion
+
     }
 }
