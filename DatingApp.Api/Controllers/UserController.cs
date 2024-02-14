@@ -8,7 +8,7 @@ namespace DatingApp.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : BaseSiteController
     {
 
         #region Constructor
