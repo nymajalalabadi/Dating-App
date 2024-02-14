@@ -19,6 +19,13 @@ builder.Services.AddDbContext<DatingAppContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DatingAppConnectionString"));
 });
+
+#endregion
+
+#region Add cors
+
+builder.Services.AddCors();
+
 #endregion
 
 var app = builder.Build();
@@ -35,6 +42,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+#region use cors
+
+app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:14444/"));
+
+#endregion
 
 app.UseAuthorization();
 
