@@ -1,4 +1,6 @@
-﻿using Application.Services.Implementations;
+﻿using Application.Extensions;
+using Application.Senders.Mail;
+using Application.Services.Implementations;
 using Application.Services.Interfaces;
 using Data.Repositories;
 using Domain.Interfaces;
@@ -18,6 +20,10 @@ namespace IOC.Dependencies
             #region Service
 
             services.AddScoped<IUserService, UserService>();
+
+            services.AddScoped<ISendMail, SendMail>();
+
+            services.AddScoped<IViewRender, RenderViewToString>();
 
             #endregion
 
