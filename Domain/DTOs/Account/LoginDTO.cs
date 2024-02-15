@@ -22,6 +22,13 @@ namespace Domain.DTOs.Account
         public string Password { get; set; }
 
         #endregion
+    }
 
+    public enum LoginResult
+    {
+        Success,
+        Error,
+        UserNotFound,
+        EmailNotActive
     }
 }

@@ -21,6 +21,8 @@ namespace Domain.Interfaces
 
         Task SaveChanges();
 
+        Task<User?> GetUserByEmailAndPassword(string email, string password);
+
         #endregion
     }
 }

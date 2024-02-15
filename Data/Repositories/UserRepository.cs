@@ -50,6 +50,11 @@ namespace Data.Repositories
            await _context.SaveChangesAsync();
         }
 
+        public async Task<User?> GetUserByEmailAndPassword(string email, string password)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+        }
+
         #endregion
     }
 }

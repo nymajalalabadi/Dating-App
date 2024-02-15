@@ -97,6 +97,26 @@ namespace Application.Services.Implementations
             return RegisterReuslt.Success;
         }
 
+        public async Task<LoginResult> LoginUser(LoginDTO login)
+        {
+            var hashPassword = _passwordHelper.EncodePasswordMd5(login.Password);
+
+            var user = await _userRepository.GetUserByEmailAndPassword(login.Email.ToLower().Trim(), hashPassword);
+
+            #region Validations
+
+            if (user is null)
+                return LoginResult.UserNotFound;
+
+            if (!user.IsEmailActive)
+                return LoginResult.EmailNotActive;
+
+            #endregion
+
+            return LoginResult.Success;
+
+        }
+
         #endregion
     }
 }

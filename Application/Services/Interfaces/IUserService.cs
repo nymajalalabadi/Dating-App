@@ -24,6 +24,8 @@ namespace Application.Services.Interfaces
 
         Task<RegisterReuslt> RegisterUser(RegisterDTO register);
 
+        Task<LoginResult> LoginUser(LoginDTO login);
+
         #endregion
     }
 }
