@@ -35,6 +35,21 @@ namespace Data.Repositories
             return await _context.Users.ToListAsync();
         }
 
+        public async Task<bool> CheckExistsingEmail(string email)
+        {
+            return await _context.Users.AnyAsync(u => u.Email == email);
+        }
+
+        public async Task AddUser(User user)
+        {
+            await _context.Users.AddAsync(user);
+        }
+
+        public async Task SaveChanges()
+        {
+           await _context.SaveChangesAsync();
+        }
+
         #endregion
     }
 }

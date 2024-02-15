@@ -1,4 +1,5 @@
 ﻿using Application.Extensions;
+using Application.Security.PasswordHelper;
 using Application.Senders.Mail;
 using Application.Services.Implementations;
 using Application.Services.Interfaces;
@@ -24,6 +25,8 @@ namespace IOC.Dependencies
             services.AddScoped<ISendMail, SendMail>();
 
             services.AddScoped<IViewRender, RenderViewToString>();
+
+            services.AddScoped<IPasswordHelper, PasswordHelper>();
 
             #endregion
 

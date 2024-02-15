@@ -15,6 +15,12 @@ namespace Domain.Interfaces
 
         Task<User?> GetAllUserByUserId(int userId);
 
+        Task<bool> CheckExistsingEmail(string email);
+
+        Task AddUser(User user);
+
+        Task SaveChanges();
+
         #endregion
     }
 }

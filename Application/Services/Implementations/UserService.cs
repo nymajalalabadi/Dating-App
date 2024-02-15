@@ -1,4 +1,8 @@
-﻿using Application.Services.Interfaces;
+﻿using Application.Extensions;
+using Application.Security.PasswordHelper;
+using Application.Senders.Mail;
+using Application.Services.Interfaces;
+using Domain.DTOs.Account;
 using Domain.Entities.User;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +20,18 @@ namespace Application.Services.Implementations
 
         private readonly IUserRepository _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        private readonly IPasswordHelper _passwordHelper;
+
+        private readonly IViewRender _viewRender;
+
+        private readonly ISendMail _sendMail;
+
+        public UserService(IUserRepository userRepository, IPasswordHelper passwordHelper, IViewRender viewRender, ISendMail sendMail)
         {
             _userRepository = userRepository;
+            _passwordHelper = passwordHelper;
+            _viewRender = viewRender;
+            _sendMail = sendMail;
         }
 
         #endregion
@@ -34,6 +47,54 @@ namespace Application.Services.Implementations
         public async Task<IEnumerable<User>> GetAllUsers()
         {
             return await _userRepository.GetAllUsers();
+        }
+
+        #endregion
+
+
+        #region account
+
+        public async Task<RegisterReuslt> RegisterUser(RegisterDTO register)
+        {
+            #region Validations
+
+            if (await _userRepository.CheckExistsingEmail(register.Email))
+            {
+                return RegisterReuslt.EmailIsExist;
+            }
+
+            #endregion
+
+            #region Set properties
+
+            var user = new User()
+            {
+                Email = register.Email,
+                Avatar = "Default.png",
+                IsEmailActive = false,
+                Mobile = null,
+                Password = _passwordHelper.EncodePasswordMd5(register.Password),
+                RegisterDate = DateTime.Now,
+                UserName = register.Email.Split('@')[0]
+            };
+
+            #endregion
+
+            #region Insert user
+
+            await _userRepository.AddUser(user);
+            await _userRepository.SaveChanges();
+
+            #endregion
+
+            #region Send email
+
+            string body = _viewRender.RenderToStringAsync("VerigyRegisterAccount", new { });
+            _sendMail.Send(user.Email, "فعالسازی حساب کاربری", body);
+
+            #endregion
+
+            return RegisterReuslt.Success;
         }
 
         #endregion

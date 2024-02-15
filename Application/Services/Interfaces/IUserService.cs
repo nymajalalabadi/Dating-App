@@ -1,4 +1,5 @@
-﻿using Domain.Entities.User;
+﻿using Domain.DTOs.Account;
+using Domain.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,13 @@ namespace Application.Services.Interfaces
         Task<User?> GetAllUserByUserId(int userId);
 
         Task<IEnumerable<User>> GetAllUsers();
+
+        #endregion
+
+
+        #region account
+
+        Task<RegisterReuslt> RegisterUser(RegisterDTO register);
 
         #endregion
     }
