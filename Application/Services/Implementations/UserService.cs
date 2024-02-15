@@ -69,7 +69,7 @@ namespace Application.Services.Implementations
 
             var user = new User()
             {
-                Email = register.Email,
+                Email = register.Email.ToLower().Trim(),
                 Avatar = "Default.png",
                 IsEmailActive = false,
                 Mobile = null,

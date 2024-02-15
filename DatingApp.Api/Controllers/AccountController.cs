@@ -3,6 +3,7 @@ using Domain.DTOs.Account;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Win32;
 
 namespace DatingApp.Api.Controllers
 {
@@ -24,7 +25,7 @@ namespace DatingApp.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDTO register)
         {
-            RegisterReuslt res = await _userService.RegisterUser(register);
+            var res = await _userService.RegisterUser(register);
 
             switch (res)
             {
@@ -56,6 +57,27 @@ namespace DatingApp.Api.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDTO login)
         {
+            var res = await _userService.LoginUser(login);
+
+            switch (res)
+            {
+                case LoginResult.Success:
+                    TempData["SuccessMessage"] = "به سایت ما خوش امدی";
+                    break;
+
+                case LoginResult.Error:
+                    TempData["ErrorMessage"] = "مشکلی پیش آمده است. لطفا مجدد تلاش کنید";
+                    break;
+
+                case LoginResult.EmailNotActive:
+                    TempData["ErrorMessage"] = "حساب کابری شما فعال نشده است . لطفا ایمیل خود را فعال کنید";
+                    break;
+
+                default:
+                    break;
+            }
+
+
             return Ok();
         }
 
