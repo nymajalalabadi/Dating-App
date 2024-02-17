@@ -15,7 +15,7 @@ namespace DatingApp.Api.Services.Implementation
 
         public TokenService(IConfiguration configuration)
         {
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenKey"]));
+            _key = new SymmetricSecurityKey(Encoding.UTF32.GetBytes(configuration["TokenKey"]));
         }
 
         #endregion
