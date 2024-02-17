@@ -1,4 +1,5 @@
 using Data.Context;
+using DatingApp.Api.Extensions;
 using DatingApp.Api.Services.Implementation;
 using DatingApp.Api.Services.Interface;
 using IOC.Dependencies;
@@ -31,6 +32,13 @@ builder.Services.AddCors();
 
 #endregion
 
+#region Add identity
+
+builder.Services.AddIdentityService(builder.Configuration);
+
+#endregion
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -52,6 +60,7 @@ app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localho
 
 #endregion
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
