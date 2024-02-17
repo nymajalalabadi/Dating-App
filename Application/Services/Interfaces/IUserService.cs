@@ -26,6 +26,8 @@ namespace Application.Services.Interfaces
 
         Task<LoginResult> LoginUser(LoginDTO login);
 
+        Task<User?> GetUserByEmail(string email);
+
         #endregion
     }
 }

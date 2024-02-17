@@ -117,6 +117,11 @@ namespace Application.Services.Implementations
 
         }
 
+        public async Task<User?> GetUserByEmail(string email)
+        {
+            return await _userRepository.GetUserByEmail(email);
+        }
+
         #endregion
     }
 }

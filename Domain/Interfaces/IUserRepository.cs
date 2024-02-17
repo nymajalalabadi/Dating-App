@@ -23,6 +23,8 @@ namespace Domain.Interfaces
 
         Task<User?> GetUserByEmailAndPassword(string email, string password);
 
+        Task<User?> GetUserByEmail(string email);
+
         #endregion
     }
 }

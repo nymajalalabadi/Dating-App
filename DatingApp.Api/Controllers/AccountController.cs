@@ -1,6 +1,8 @@
 ﻿using Application.Services.Interfaces;
+using DatingApp.Api.Services.Interface;
 using Domain.DTOs.Account;
 using Domain.DTOs.Common;
+using Domain.DTOs.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -15,9 +17,12 @@ namespace DatingApp.Api.Controllers
 
         private readonly IUserService _userService;
 
-        public AccountController(IUserService userService)
+        private readonly ITokenService _tokenService;
+
+        public AccountController(IUserService userService, ITokenService tokenService)
         {
-               _userService = userService;
+            _userService = userService;
+            _tokenService = tokenService;
         }
 
         #endregion
@@ -52,7 +57,18 @@ namespace DatingApp.Api.Controllers
             switch (res)
             {
                 case RegisterReuslt.Success:
-                    return new JsonResult(new ResponseResult(true, "حساب کاربری شما با موفقیت ساخته شد."));
+
+                    var user = await _userService.GetUserByEmail(register.Email);
+
+                    if (user == null)
+                        return new JsonResult(new ResponseResult(false, "متاسفانه حساب کاربری شفا یافت نشد."));
+
+
+                    return new JsonResult(new ResponseResult(true, "حساب کاربری شما با موفقیت ساخته شد.", new UserDTO
+                    {
+                        UserName = user.UserName,
+                        Token = _tokenService.CreateToken(user)
+                    }));
 
                 case RegisterReuslt.Error:
                     return new JsonResult(new ResponseResult(false, "مشکلی پیش آمده است. لطفا مجدد تلاش کنید"));
@@ -63,6 +79,7 @@ namespace DatingApp.Api.Controllers
                 default:
                     break;
             }
+
 
 
             return new JsonResult(new ResponseResult(false, "خطایی رخ داده است."));
@@ -100,16 +117,31 @@ namespace DatingApp.Api.Controllers
             switch (res)
             {
                 case LoginResult.Success:
-                    return new JsonResult(new ResponseResult(true, "به سایت ما خوش امدی"));
+
+                    var user = await _userService.GetUserByEmail(login.Email);
+
+                    if (user == null)
+                        return new JsonResult(new ResponseResult(false, "متاسفانه حساب کاربری شفا یافت نشد."));
+
+                    return new JsonResult(new ResponseResult(true, "شما با موفقیت وارد حساب کاربری خودتون شدید.", new UserDTO
+                    {
+                        UserName = user.UserName,
+                        Token = _tokenService.CreateToken(user)
+                    }));
+
+                    break;
 
                 case LoginResult.Error:
                     return new JsonResult(new ResponseResult(false, "مشکلی پیش آمده است. لطفا مجدد تلاش کنید"));
 
                 case LoginResult.EmailNotActive:
-                    return new JsonResult(new ResponseResult(false, "حساب کابری شما فعال نشده است . لطفا ایمیل خود را فعال کنید"));
+                    return new JsonResult(new ResponseResult(false, "حساب کاربری شما فعال نشده است. لطفا ابتدا حساب کاربری خودتون رو فعال کنید."));
+
                 default:
                     break;
             }
+
+
 
 
             return new JsonResult(new ResponseResult(false, "خطایی رخ داده است."));
