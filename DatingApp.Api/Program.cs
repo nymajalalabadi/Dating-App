@@ -1,4 +1,6 @@
 using Data.Context;
+using DatingApp.Api.Services.Implementation;
+using DatingApp.Api.Services.Interface;
 using IOC.Dependencies;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +11,7 @@ builder.Services.AddControllersWithViews();
 
 #region add services
 
+builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.RegisterServices();
 
 #endregion
