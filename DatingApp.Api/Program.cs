@@ -12,17 +12,9 @@ builder.Services.AddControllersWithViews();
 
 #region add services
 
-builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.RegisterServices();
 
-#endregion
-
-#region add db context
-
-builder.Services.AddDbContext<DatingAppContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DatingAppConnectionString"));
-});
+builder.Services.AddApplicationService(builder.Configuration);
 
 #endregion
 
