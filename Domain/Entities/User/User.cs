@@ -41,9 +41,48 @@ namespace Domain.Entities.User
         [Display(Name = "ایمیل فعال باشد؟")]
         public bool IsEmailActive { get; set; }
 
+        [Display(Name = "تاریخ تولد کاربر")]
+        public DateTime DateOfBirth { get; set; } = DateTime.Now;
+
+        [Display(Name = "اخرین فعالیت کاربر")]
+        public DateTime LastActive { get; set; } = DateTime.Now;
+
+        [Display(Name = "جنسیت کاربر")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(350, ErrorMessage = "حداکثر کاراکتر مجاز {1} می باشد")]
+        public string Gender { get; set; }
+
+        public string Introduction { get; set; }
+
+        public string LookingFor { get; set; }
+
+        public string Interests { get; set; }
+
+        [Display(Name = "شهر")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "حداکثر کاراکتر مجاز {1} می باشد")]
+        public string City { get; set; }
+
+        [Display(Name = "کشور")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "حداکثر کاراکتر مجاز {1} می باشد")]
+        public string Country { get; set; }
+
+        [Display(Name = "نحوه آشنایی")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(350, ErrorMessage = "حداکثر کاراکتر مجاز {1} می باشد")]
+        public string KnowAs { get; set; }
+
         [Display(Name = "تاریخ ثبت نام")]
         public DateTime RegisterDate { get; set; }
 
         #endregion
+
+        #region Relations
+
+        public ICollection<Photo.Photo> Photos { get; set; }
+
+        #endregion
+
     }
 }
