@@ -1,4 +1,5 @@
 ﻿using Application.Services.Interfaces;
+using Domain.DTOs.User;
 using Domain.Entities.User;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,16 +25,16 @@ namespace DatingApp.Api.Controllers
 
         // GET: api/<UserController>
         [HttpGet]
-        public async Task<IEnumerable<User>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await _userService.GetAllUsers();
+            return Ok(await _userService.GetAllUserInformation());
         }
 
         // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public async Task<User?> Get(int id)
+        [HttpGet("{userName}")]
+        public async Task<IActionResult> Get(string userName)
         {
-            return await _userService.GetAllUserByUserId(id);
+            return Ok(await _userService.GetUserInformationByUserName(userName));
         }
 
         // POST api/<UserController>
