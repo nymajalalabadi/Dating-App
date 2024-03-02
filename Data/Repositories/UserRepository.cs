@@ -32,7 +32,7 @@ namespace Data.Repositories
 
         public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Include(u => u.Photos).ToListAsync();
         }
 
         public async Task<bool> CheckExistsingEmail(string email)
@@ -59,6 +59,12 @@ namespace Data.Repositories
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
         }
+
+        public async Task<User?> GetUserByUserName(string userName)
+        {
+            return await _context.Users.Include(u => u.Photos).FirstOrDefaultAsync(u => u.UserName.Contains(userName.Trim()));
+        }
+
 
         #endregion
     }

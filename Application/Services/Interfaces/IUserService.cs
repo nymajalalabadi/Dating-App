@@ -1,4 +1,5 @@
 ﻿using Domain.DTOs.Account;
+using Domain.DTOs.User;
 using Domain.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -27,6 +28,10 @@ namespace Application.Services.Interfaces
         Task<LoginResult> LoginUser(LoginDTO login);
 
         Task<User?> GetUserByEmail(string email);
+
+        Task<List<MemberDTO>> GetAllUserInformation();
+
+        Task<MemberDTO?> GetUserInformationByUserName(string userName);
 
         #endregion
     }

@@ -21,6 +21,11 @@ namespace Domain.DTOs.Photo
 
         #endregion
 
+
+        #region Relations
+
         public MemberDTO MemberDTO { get; set; }
+
+        #endregion
     }
 }

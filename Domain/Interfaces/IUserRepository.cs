@@ -25,6 +25,8 @@ namespace Domain.Interfaces
 
         Task<User?> GetUserByEmail(string email);
 
+        Task<User?> GetUserByUserName(string userName);
+
         #endregion
     }
 }

@@ -1,8 +1,11 @@
 ﻿using Application.Extensions;
+using Application.Extensions.Common;
 using Application.Security.PasswordHelper;
 using Application.Senders.Mail;
 using Application.Services.Interfaces;
 using Domain.DTOs.Account;
+using Domain.DTOs.Photo;
+using Domain.DTOs.User;
 using Domain.Entities.User;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -120,6 +123,71 @@ namespace Application.Services.Implementations
         public async Task<User?> GetUserByEmail(string email)
         {
             return await _userRepository.GetUserByEmail(email);
+        }
+
+        public async Task<List<MemberDTO>> GetAllUserInformation()
+        {
+            var users = await _userRepository.GetAllUsers();
+
+            return users.Select(u => new MemberDTO()
+            {
+                UserId = u.UserId,
+                Avatar = u.Avatar,
+                Age = u.DateOfBirth.CalculateAge(),
+                City = u.City,
+                Country = u.Country,
+                Email = u.Email,
+                Gender = u.Gender,
+                Interests = u.Interests,
+                Introduction = u.Introduction,
+                IsEmailActive = u.IsEmailActive,
+                KnowAs = u.KnowAs,
+                LookingFor = u.LookingFor,
+                Mobile = u.Mobile,
+                RegisterDate = u.RegisterDate,
+                UserName = u.UserName,
+                Photos = u.Photos.Select(p => new PhotoDTO()
+                {
+                    Id = p.Id,
+                    IsMain = p.IsMain,
+                    Url = p.Url
+                }).ToList()
+            }).ToList();
+
+        }
+
+        public async Task<MemberDTO?> GetUserInformationByUserName(string userName)
+        {
+            var user = await _userRepository.GetUserByUserName(userName);
+
+            if (user == null)
+                return null;
+
+            return new MemberDTO()
+            {
+                UserId = user.UserId,
+                Avatar = user.Avatar,
+                Age = user.DateOfBirth.CalculateAge(),
+                City = user.City,
+                Country = user.Country,
+                Email = user.Email,
+                Gender = user.Gender,
+                Interests = user.Interests,
+                Introduction = user.Introduction,
+                IsEmailActive = user.IsEmailActive,
+                KnowAs = user.KnowAs,
+                LookingFor = user.LookingFor,
+                Mobile = user.Mobile,
+                RegisterDate = user.RegisterDate,
+                UserName = user.UserName,
+                Photos = user.Photos.Select(p => new PhotoDTO()
+                {
+                    Id = p.Id,
+                    IsMain = p.IsMain,
+                    Url = p.Url
+                }).ToList()
+            };
+
         }
 
         #endregion

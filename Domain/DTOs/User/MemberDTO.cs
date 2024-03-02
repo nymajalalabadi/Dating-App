@@ -45,6 +45,11 @@ namespace Domain.DTOs.User
 
         #endregion
 
+
+        #region Relations
+
         public ICollection<PhotoDTO> Photos { get; set; }
+
+        #endregion
     }
 }
