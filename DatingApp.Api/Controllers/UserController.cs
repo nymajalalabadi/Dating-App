@@ -1,6 +1,4 @@
 ﻿using Application.Services.Interfaces;
-using Domain.DTOs.User;
-using Domain.Entities.User;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

@@ -4,11 +4,7 @@ using Domain.DTOs.Account;
 using Domain.DTOs.Common;
 using Domain.DTOs.User;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Win32;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DatingApp.Api.Controllers
 {
