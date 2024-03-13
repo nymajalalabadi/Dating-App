@@ -27,7 +27,6 @@ namespace Domain.Entities.User
 
         [Display(Name = "نام کاربری")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(350, ErrorMessage = "حداکثر کاراکتر مجاز {1} می باشد")]
         public string UserName { get; set; }
 
         [Display(Name = "شماره موبایل")]
@@ -49,7 +48,6 @@ namespace Domain.Entities.User
 
         [Display(Name = "جنسیت کاربر")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(350, ErrorMessage = "حداکثر کاراکتر مجاز {1} می باشد")]
         public string Gender { get; set; }
 
         public string Introduction { get; set; }
@@ -60,17 +58,14 @@ namespace Domain.Entities.User
 
         [Display(Name = "شهر")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(200, ErrorMessage = "حداکثر کاراکتر مجاز {1} می باشد")]
         public string City { get; set; }
 
         [Display(Name = "کشور")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(200, ErrorMessage = "حداکثر کاراکتر مجاز {1} می باشد")]
         public string Country { get; set; }
 
         [Display(Name = "نحوه آشنایی")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(350, ErrorMessage = "حداکثر کاراکتر مجاز {1} می باشد")]
         public string KnowAs { get; set; }
 
         [Display(Name = "تاریخ ثبت نام")]
