@@ -36,27 +36,20 @@ namespace DatingApp.Api.Controllers
                 List<string> errors = new List<string>();
 
                 foreach (var modelError in ViewData.ModelState.Values)
-                {
                     foreach (var error in modelError.Errors)
-                    {
                         errors.Add(error.ErrorMessage);
-                    }
-                }
 
                 return new JsonResult(new ResponseResult(false, "", errors));
             }
 
             #endregion
 
-
-            var res = await _userService.RegisterUser(register);
-
+            RegisterReuslt res = await _userService.RegisterUser(register);
             switch (res)
             {
                 case RegisterReuslt.Success:
 
                     var user = await _userService.GetUserByEmail(register.Email);
-
                     if (user == null)
                         return new JsonResult(new ResponseResult(false, "متاسفانه حساب کاربری شفا یافت نشد."));
 
@@ -77,9 +70,6 @@ namespace DatingApp.Api.Controllers
                     break;
             }
 
-
-
-
             return new JsonResult(new ResponseResult(false, "خطایی رخ داده است."));
         }
 
@@ -91,33 +81,16 @@ namespace DatingApp.Api.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDTO login)
         {
-            #region Validations
-
             if (!ModelState.IsValid)
-            {
-                List<string> errors = new List<string>();
+                return BadRequest(ModelState);
 
-                foreach (var modelError in ViewData.ModelState.Values)
-                {
-                    foreach (var error in modelError.Errors)
-                    {
-                        errors.Add(error.ErrorMessage);
-                    }
-                }
-
-                return new JsonResult(new ResponseResult(false, "", errors));
-            }
-
-            #endregion
-
-            var res = await _userService.LoginUser(login);
+            LoginResult res = await _userService.LoginUser(login);
 
             switch (res)
             {
                 case LoginResult.Success:
 
                     var user = await _userService.GetUserByEmail(login.Email);
-
                     if (user == null)
                         return new JsonResult(new ResponseResult(false, "متاسفانه حساب کاربری شفا یافت نشد."));
 
@@ -126,8 +99,6 @@ namespace DatingApp.Api.Controllers
                         UserName = user.UserName,
                         Token = _tokenService.CreateToken(user)
                     }));
-
-                    break;
 
                 case LoginResult.Error:
                     return new JsonResult(new ResponseResult(false, "مشکلی پیش آمده است. لطفا مجدد تلاش کنید"));
@@ -139,18 +110,16 @@ namespace DatingApp.Api.Controllers
                     break;
             }
 
+            return Ok();
 
-
-
-            return new JsonResult(new ResponseResult(false, "خطایی رخ داده است."));
         }
 
-        #endregion
+            #endregion
 
 
-        #region forgot-password
+            #region forgot-password
 
-        [HttpPost("forgot-password")]
+            [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordDTO forgotPassword)
         {
             return Ok();

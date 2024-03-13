@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DatingAppContext))]
-    [Migration("20240313083634_UpdateAginuUser")]
-    partial class UpdateAginuUser
+    [Migration("20240313093437_AddAllTbl")]
+    partial class AddAllTbl
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,8 +64,7 @@ namespace Data.Migrations
 
                     b.Property<string>("Avatar")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -98,6 +97,9 @@ namespace Data.Migrations
                     b.Property<bool>("IsEmailActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsMobileActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("KnowAs")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -110,8 +112,7 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mobile")
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .IsRequired()

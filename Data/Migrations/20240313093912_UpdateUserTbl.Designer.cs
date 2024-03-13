@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DatingAppContext))]
-    [Migration("20240222063418_AddSomePropertyInUser")]
-    partial class AddSomePropertyInUser
+    [Migration("20240313093912_UpdateUserTbl")]
+    partial class UpdateUserTbl
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,35 @@ namespace Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Domain.Entities.Photo.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("Domain.Entities.User.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -34,19 +63,13 @@ namespace Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("Avatar")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
@@ -57,36 +80,28 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(350)");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasMaxLength(350)
-                        .HasColumnType("nvarchar(350)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Interests")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Introduction")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsEmailActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("KnowAs")
-                        .IsRequired()
-                        .HasMaxLength(350)
-                        .HasColumnType("nvarchar(350)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("LastActive")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LookingFor")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mobile")
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -97,13 +112,27 @@ namespace Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(350)
-                        .HasColumnType("nvarchar(350)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Photo.Photo", b =>
+                {
+                    b.HasOne("Domain.Entities.User.User", "User")
+                        .WithMany("Photos")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.User.User", b =>
+                {
+                    b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618
         }

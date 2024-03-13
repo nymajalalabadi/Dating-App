@@ -13,15 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IOC", "IOC", "{0E602D66-69B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentations", "Presentations", "{8CF67435-E6E6-4BC7-8909-9A6FD9955059}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{28373516-AA5E-41D6-A7B0-BCCF71EA1BED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{28373516-AA5E-41D6-A7B0-BCCF71EA1BED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{4F8FA860-4ADE-42E4-924F-2B595FBF57B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{4F8FA860-4ADE-42E4-924F-2B595FBF57B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{5BBEF0B4-28CE-44F7-B838-51A581BA2BB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{5BBEF0B4-28CE-44F7-B838-51A581BA2BB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOC", "IOC\IOC.csproj", "{7C4B5B33-033B-4A9F-8797-3F8BAC84959C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOC", "IOC\IOC.csproj", "{7C4B5B33-033B-4A9F-8797-3F8BAC84959C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingApp.Api", "DatingApp.Api\DatingApp.Api.csproj", "{10F747E9-F6DC-4FB4-A0EC-F3F1FE6FAA80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatingApp.Api", "DatingApp.Api\DatingApp.Api.csproj", "{10F747E9-F6DC-4FB4-A0EC-F3F1FE6FAA80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

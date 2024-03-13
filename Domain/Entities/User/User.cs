@@ -26,16 +26,13 @@ namespace Domain.Entities.User
         public string Password { get; set; }
 
         [Display(Name = "نام کاربری")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         [Display(Name = "شماره موبایل")]
-        [MaxLength(11, ErrorMessage = "حداکثر کاراکتر مجاز {1} می باشد")]
         public string? Mobile { get; set; }
 
         [Display(Name = "آواتار")]
-        [MaxLength(50, ErrorMessage = "حداکثر کاراکتر مجاز {1} می باشد")]
-        public string Avatar { get; set; }
+        public string? Avatar { get; set; }
 
         [Display(Name = "ایمیل فعال باشد؟")]
         public bool IsEmailActive { get; set; }
@@ -47,26 +44,22 @@ namespace Domain.Entities.User
         public DateTime LastActive { get; set; } = DateTime.Now;
 
         [Display(Name = "جنسیت کاربر")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        public string Gender { get; set; }
+        public string? Gender { get; set; }
 
-        public string Introduction { get; set; }
+        public string? Introduction { get; set; }
 
-        public string LookingFor { get; set; }
+        public string? LookingFor { get; set; }
 
-        public string Interests { get; set; }
+        public string? Interests { get; set; }
 
         [Display(Name = "شهر")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        public string City { get; set; }
+        public string? City { get; set; }
 
         [Display(Name = "کشور")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        public string Country { get; set; }
+        public string? Country { get; set; }
 
         [Display(Name = "نحوه آشنایی")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        public string KnowAs { get; set; }
+        public string? KnowAs { get; set; }
 
         [Display(Name = "تاریخ ثبت نام")]
         public DateTime RegisterDate { get; set; }
