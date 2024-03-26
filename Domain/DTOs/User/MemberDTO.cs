@@ -21,7 +21,7 @@ namespace Domain.DTOs.User
 
         public string? Mobile { get; set; }
 
-        public string Avatar { get; set; }
+        public string PhotoUrl { get; set; }
 
         public bool IsEmailActive { get; set; }
 

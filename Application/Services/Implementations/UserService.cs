@@ -132,7 +132,7 @@ namespace Application.Services.Implementations
             return users.Select(u => new MemberDTO()
             {
                 UserId = u.UserId,
-                Avatar = u.Avatar,
+                PhotoUrl = $"https://localhost:7220/images/users/{u.Avatar}",
                 Age = u.DateOfBirth.CalculateAge(),
                 City = u.City,
                 Country = u.Country,
@@ -154,6 +154,7 @@ namespace Application.Services.Implementations
                 }).ToList()
             }).ToList();
 
+
         }
 
         public async Task<MemberDTO?> GetUserInformationByUserName(string userName)
@@ -166,7 +167,7 @@ namespace Application.Services.Implementations
             return new MemberDTO()
             {
                 UserId = user.UserId,
-                Avatar = user.Avatar,
+                PhotoUrl = $"https://localhost:7220/images/users/{user.Avatar}",
                 Age = user.DateOfBirth.CalculateAge(),
                 City = user.City,
                 Country = user.Country,
@@ -187,7 +188,6 @@ namespace Application.Services.Implementations
                     Url = p.Url
                 }).ToList()
             };
-
         }
 
         #endregion

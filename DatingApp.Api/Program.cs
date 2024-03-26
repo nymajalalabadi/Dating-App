@@ -46,9 +46,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-#region use cors
+#region Use cors
 
-app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200/"));
+app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 #endregion
 

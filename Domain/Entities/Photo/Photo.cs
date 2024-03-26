@@ -30,7 +30,6 @@ namespace Domain.Entities.Photo
         public User.User User { get; set; }
 
         #endregion
-
     }
 
 }
