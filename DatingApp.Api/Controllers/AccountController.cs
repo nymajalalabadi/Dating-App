@@ -114,12 +114,12 @@ namespace DatingApp.Api.Controllers
 
         }
 
-            #endregion
+        #endregion
 
 
-            #region forgot-password
+        #region forgot-password
 
-            [HttpPost("forgot-password")]
+        [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordDTO forgotPassword)
         {
             return Ok();

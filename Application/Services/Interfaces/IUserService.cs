@@ -12,27 +12,29 @@ namespace Application.Services.Interfaces
 {
     public interface IUserService
     {
-        #region user
+        #region Account
 
-        Task<User?> GetAllUserByUserId(int userId);
+        Task<RegisterReuslt> RegisterUser(RegisterDTO registerDTO);
 
-        Task<IEnumerable<User>> GetAllUsers();
+        Task<LoginResult> LoginUser(LoginDTO loginDTO);
 
         #endregion
 
+        #region User
 
-        #region account
+        Task<IEnumerable<User>> GetAllUsers();
 
-        Task<RegisterReuslt> RegisterUser(RegisterDTO register);
-
-        Task<LoginResult> LoginUser(LoginDTO login);
+        Task<User?> GetAllUserByUserId(int userId);
 
         Task<User?> GetUserByEmail(string email);
 
         Task<List<MemberDTO>> GetAllUserInformation();
 
-        Task<MemberDTO?> GetUserInformationByUserName(string userName);
+        Task<MemberDTO> GetUserInformationByUserName(string userName);
+
+        Task<bool> UpdateMember(UpdateMemberDTO model, int userId);
 
         #endregion
+
     }
 }

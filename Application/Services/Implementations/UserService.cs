@@ -39,22 +39,6 @@ namespace Application.Services.Implementations
 
         #endregion
 
-
-        #region user
-
-        public async Task<User?> GetAllUserByUserId(int userId)
-        {
-            return await _userRepository.GetAllUserByUserId(userId);
-        }
-
-        public async Task<IEnumerable<User>> GetAllUsers()
-        {
-            return await _userRepository.GetAllUsers();
-        }
-
-        #endregion
-
-
         #region account
 
         public async Task<RegisterReuslt> RegisterUser(RegisterDTO register)
@@ -119,6 +103,23 @@ namespace Application.Services.Implementations
             return LoginResult.Success;
 
         }
+
+        #endregion
+
+
+        #region user
+
+        public async Task<User?> GetAllUserByUserId(int userId)
+        {
+            return await _userRepository.GetAllUserByUserId(userId);
+        }
+
+        public async Task<IEnumerable<User>> GetAllUsers()
+        {
+            return await _userRepository.GetAllUsers();
+        }
+
+
 
         public async Task<User?> GetUserByEmail(string email)
         {
@@ -188,6 +189,24 @@ namespace Application.Services.Implementations
                     Url = p.Url
                 }).ToList()
             };
+        }
+
+        public async Task<bool> UpdateMember(UpdateMemberDTO model, int userId)
+        {
+            var user = await _userRepository.GetAllUserByUserId(userId);
+
+            if (user == null) return false;
+
+            user.Introduction = model.Introduction;
+            user.Interests = model.Intrests;
+            user.LookingFor = model.LookingFor;
+            user.City = model.City;
+            user.Country = model.Country;
+
+            _userRepository.UpdateUser(user);
+            await _userRepository.SaveChanges();
+
+            return true;
         }
 
         #endregion

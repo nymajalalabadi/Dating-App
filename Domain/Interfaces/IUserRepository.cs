@@ -27,6 +27,8 @@ namespace Domain.Interfaces
 
         Task<User?> GetUserByUserName(string userName);
 
+        void UpdateUser(User user);
+
         #endregion
     }
 }
