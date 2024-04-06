@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.Api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class UserController : BaseSiteController
     {
 
@@ -44,9 +42,28 @@ namespace DatingApp.Api.Controllers
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(UpdateMemberDTO updateMember)
+        public async Task<IActionResult> Put(UpdateMemberDTO updateMember)
         {
+            var userId = 1;
 
+            var result = await _userService.UpdateMember(updateMember, userId);
+
+            if (result)
+            {
+                return new JsonResult(new
+                {
+                    Message = "updated",
+                    StatusCode = 200,
+                    IsSuccess = true
+                });
+            }
+
+            return new JsonResult(new
+            {
+                Message = "Has error",
+                StatusCode = 201,
+                IsSuccess = false
+            });
         }
 
         // DELETE api/<UserController>/5
