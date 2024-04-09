@@ -1,6 +1,8 @@
-﻿using Application.Services.Interfaces;
+﻿using Application.Extensions;
+using Application.Services.Interfaces;
 using Domain.DTOs.User;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -44,7 +46,7 @@ namespace DatingApp.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(UpdateMemberDTO updateMember)
         {
-            var userId = 1;
+            var userId = User.GetUserId();
 
             var result = await _userService.UpdateMember(updateMember, userId);
 
