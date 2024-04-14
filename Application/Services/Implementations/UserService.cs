@@ -8,12 +8,6 @@ using Domain.DTOs.Photo;
 using Domain.DTOs.User;
 using Domain.Entities.User;
 using Domain.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services.Implementations
 {
