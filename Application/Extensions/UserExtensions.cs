@@ -9,7 +9,7 @@ namespace Application.Extensions
         {
             if (claims != null)
             {
-                var data = claims.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var data = claims.Claims.SingleOrDefault(c => c.Type == "UserId");
 
                 if (data != null)
                     return Convert.ToInt32(data.Value);

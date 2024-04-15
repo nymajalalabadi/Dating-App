@@ -30,7 +30,7 @@ namespace DatingApp.Api.Services.Implementation
         {
             var claims = new List<Claim>
             {
-               new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString()),
+               new Claim("UserId",user.UserId.ToString()),
                new Claim(JwtRegisteredClaimNames.NameId,user.UserName)
             };
 
@@ -40,7 +40,7 @@ namespace DatingApp.Api.Services.Implementation
                 (
                 _configuration["Jwt:Issuer"],
                _configuration["Jwt:Issuer"],
-               null,
+               claims,
                expires: DateTime.Now.AddDays(7),
                signingCredentials: creds
                );

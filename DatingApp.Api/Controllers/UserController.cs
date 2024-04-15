@@ -44,7 +44,7 @@ namespace DatingApp.Api.Controllers
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(UpdateMemberDTO updateMember)
+        public async Task<IActionResult> Put([FromBody] UpdateMemberDTO updateMember)
         {
             var userId = User.GetUserId();
 
