@@ -56,7 +56,12 @@ namespace Application.Services.Implementations
                 Mobile = null,
                 Password = _passwordHelper.EncodePasswordMd5(register.Password),
                 RegisterDate = DateTime.Now,
-                UserName = register.Email.Split('@')[0]
+                UserName = register.Email.Split('@')[0],
+                City = register.City,
+                Country = register.Country,
+                DateOfBirth = register.DateOfBirth,
+                Gender = register.Gender,
+                KnowAs = register.KnownAs
             };
 
             #endregion

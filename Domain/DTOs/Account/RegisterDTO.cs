@@ -27,6 +27,26 @@ namespace Domain.DTOs.Account
         [Compare(nameof(Password), ErrorMessage = "کلمه عبور و تکرار آن یکسان نمی باشد")]
         public string ConfirmPassword { get; set; }
 
+        [Display(Name = "نحوه آشنایی")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string KnownAs { get; set; }
+
+        [Display(Name = "تاریخ تولد")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public DateTime DateOfBirth { get; set; }
+
+        [Display(Name = "شهر")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string City { get; set; }
+
+        [Display(Name = "کشور")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string Country { get; set; }
+
+        [Display(Name = "جنسیت")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string Gender { get; set; }
+
         #endregion
     }
 
