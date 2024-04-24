@@ -24,7 +24,39 @@ namespace DatingApp.Api.Controllers
         {
             var sourceUserId = User.GetUserId();
 
-            return Ok();
+            var result = await _userLikeService.AddUserLikeAsync(sourceUserId, userName);
+
+            if (result)
+            {
+                return new JsonResult(new
+                {
+                    Message = "عملیات با موفقیت انجام شد",
+                    StatusCode = 200,
+                    IsSuccess = true
+                });
+            }
+            else
+            {
+                return new JsonResult(new
+                {
+                    Message = "Has error",
+                    StatusCode = 201,
+                    IsSuccess = false
+                });
+            }
+
+        }
+
+        #endregion
+
+        #region Get user like
+
+        [HttpGet]
+        public async Task<IActionResult> GetUserLikes(string predicate)
+        {
+            var users = await _userLikeService.GetUserLikes(predicate, User.GetUserId());
+
+            return Ok(users);
         }
 
         #endregion
