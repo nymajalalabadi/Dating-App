@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,6 +70,12 @@ namespace Domain.Entities.User
         #region Relations
 
         public ICollection<Photo.Photo> Photos { get; set; }
+
+        [InverseProperty("SourceUser")]
+        public ICollection<UserLike> LikedByUsers { get; set; }
+
+        [InverseProperty("LikedUser")]
+        public ICollection<UserLike> LikedUsers { get; set; }
 
         #endregion
 

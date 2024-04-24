@@ -21,6 +21,8 @@ namespace Data.Context
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<UserLike> userLikes { get; set; }
+
         #endregion
 
         #region Photos
@@ -28,6 +30,14 @@ namespace Data.Context
         public DbSet<Photo> Photos { get; set; }
 
         #endregion
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+        }
 
     }
 }
