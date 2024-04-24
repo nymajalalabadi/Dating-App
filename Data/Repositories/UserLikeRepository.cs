@@ -65,5 +65,15 @@ namespace Data.Repositories
                 Id = u.UserId
             }).ToListAsync();
         }
+
+        public async Task AddUserLike(UserLike userLike)
+        {
+            _context.UserLikes.AddAsync(userLike);
+        }
+
+        public async Task SaveChanges()
+        {
+            _context.SaveChanges();
+        }
     }
 }

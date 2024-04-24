@@ -15,5 +15,9 @@ namespace Domain.Interfaces
         Task<User> GetUserWithLikes(int userId);
 
         Task<IEnumerable<LikeDTO>> GetUserLikes(string predicate, int userId);
+
+        Task AddUserLike(UserLike userLike);
+
+        Task SaveChanges();
     }
 }

@@ -16,9 +16,12 @@ namespace Application.Services.Implementations
 
         private readonly IUserLikeRepository _userLikeRepository;
 
-        public UserLikeService(IUserLikeRepository userLikeRepository) 
+        private readonly IUserRepository _userRepository;
+
+        public UserLikeService(IUserLikeRepository userLikeRepository, IUserRepository userRepository) 
         {
             _userLikeRepository = userLikeRepository;
+            _userRepository = userRepository;
         }
 
         #endregion
@@ -35,7 +38,36 @@ namespace Application.Services.Implementations
 
         public async Task<IEnumerable<LikeDTO>> GetUserLikes(string predicate, int userId)
         {
+            return await _userLikeRepository.GetUserLikes(predicate, userId);
+        }
 
+        public async Task<bool> AddUserLikeAsync(int sourceUserId, string userName)
+        {
+            var likedUser = await _userRepository.GetUserByUserName(userName);
+
+            var sourceUser = await _userRepository.GetUserByUserId(sourceUserId);
+
+            if (likedUser == null)
+                return false;
+
+            if (sourceUser.UserName == userName)
+                return false;
+
+            var userLike = await _userLikeRepository.GetUserLike(sourceUserId, likedUser.UserId);
+
+            if (userLike != null)
+                return false;
+
+            userLike = new UserLike()
+            {
+                SourceUserId = sourceUser.UserId,
+                LikedUserId = likedUser.UserId
+            };
+
+            await _userLikeRepository.AddUserLike(userLike);
+            await _userLikeRepository.SaveChanges();
+
+            return true;
         }
     }
 }

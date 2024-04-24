@@ -65,6 +65,11 @@ namespace Data.Repositories
             return await _context.Users.Include(u => u.Photos).FirstOrDefaultAsync(u => u.UserName.Contains(userName.Trim()));
         }
 
+        public async Task<User?> GetUserByUserId(int userId)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.UserId.Equals(userId));
+        }
+
         public void UpdateUser(User user)
         {
             _context.Users.Update(user);

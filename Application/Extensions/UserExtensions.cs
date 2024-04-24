@@ -5,23 +5,19 @@ namespace Application.Extensions
 {
     public static class UserExtensions
     {
-        public static int GetUserId(this ClaimsPrincipal claims)
+        public static int GetUserId(this ClaimsPrincipal claimsPrincipal)
         {
-            if (claims != null)
+            var userId = claimsPrincipal.FindFirst("UserId")?.Value;
+
+            if (!string.IsNullOrWhiteSpace(userId))
             {
-                var data = claims.Claims.SingleOrDefault(c => c.Type == "UserId");
-
-                if (data != null)
-                    return Convert.ToInt32(data.Value);
+                return int.Parse(userId);
             }
-            return default(int);
+            else
+            {
+                return default(int);
+            }
         }
 
-        public static int GetUserId(this IPrincipal principal)
-        {
-            var user = (ClaimsPrincipal)principal;
-
-            return user.GetUserId();
-        }
     }
 }

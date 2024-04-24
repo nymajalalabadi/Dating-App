@@ -15,5 +15,7 @@ namespace Application.Services.Interfaces
         Task<User> GetUserWithLikes(int userId);
 
         Task<IEnumerable<LikeDTO>> GetUserLikes(string predicate, int userId);
+
+        Task<bool> AddUserLikeAsync(int sourceUserId, string userName);
     }
 }
