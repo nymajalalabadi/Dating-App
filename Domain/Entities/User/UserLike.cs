@@ -22,6 +22,7 @@ namespace Domain.Entities.User
         [InverseProperty("LikedByUsers")]
         public User SourceUser { get; set; }
 
+
         [ForeignKey(nameof(LikedUserId))]
         [InverseProperty("LikedUsers")]
         public User LikedUser { get; set; }

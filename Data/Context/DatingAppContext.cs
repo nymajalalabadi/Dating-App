@@ -21,7 +21,7 @@ namespace Data.Context
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<UserLike> userLikes { get; set; }
+        public DbSet<UserLike> UserLikes { get; set; }
 
         #endregion
 

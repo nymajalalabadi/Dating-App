@@ -17,6 +17,8 @@ namespace IOC.Dependencies
 
             services.AddScoped<IUserService, UserService>();
 
+            services.AddScoped<IUserLikeService, UserLikeService>();
+
             services.AddScoped<ISendMail, SendMail>();
 
             services.AddScoped<IViewRender, RenderViewToString>();
@@ -29,6 +31,8 @@ namespace IOC.Dependencies
             #region Repository
 
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IUserLikeRepository, UserLikeRepository>();
 
             #endregion
         }
