@@ -60,7 +60,7 @@ namespace Data.Repositories
                 Username = u.UserName,
                 KnownAs = u.KnowAs,
                 Age = 45,
-                PhotoUrl = u.Photos.FirstOrDefault(p => p.IsMain).Url,
+                PhotoUrl = $"https://localhost:7220/images/users/{u.Avatar}",
                 City = u.City,
                 Id = u.UserId
             }).ToListAsync();
