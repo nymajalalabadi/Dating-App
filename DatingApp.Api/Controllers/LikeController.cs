@@ -20,6 +20,7 @@ namespace DatingApp.Api.Controllers
 
         #region add Like
 
+        [HttpPost("{userName}")]
         public async Task<IActionResult> AddLike(string userName)
         {
             var sourceUserId = User.GetUserId();
