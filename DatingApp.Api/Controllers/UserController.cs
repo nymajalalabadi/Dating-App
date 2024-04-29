@@ -1,6 +1,7 @@
 ﻿using Application.Extensions;
 using Application.Services.Interfaces;
 using Domain.DTOs.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -43,7 +44,8 @@ namespace DatingApp.Api.Controllers
         }
 
         // PUT api/<UserController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Put([FromBody] UpdateMemberDTO updateMember)
         {
             var userId = User.GetUserId();
