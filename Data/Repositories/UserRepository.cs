@@ -35,6 +35,11 @@ namespace Data.Repositories
             return await _context.Users.Include(u => u.Photos).ToListAsync();
         }
 
+        public IQueryable<User> GetAllUsersAsQueryable()
+        {
+            return  _context.Users.Include(u => u.Photos).AsQueryable();
+        }
+
         public async Task<bool> CheckExistsingEmail(string email)
         {
             return await _context.Users.AnyAsync(u => u.Email == email);

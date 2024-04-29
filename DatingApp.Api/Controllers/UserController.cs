@@ -1,6 +1,8 @@
 ﻿using Application.Extensions;
 using Application.Services.Interfaces;
+using DatingApp.Api.Extensions;
 using Domain.DTOs.User;
+using Domain.Entities.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -25,9 +27,13 @@ namespace DatingApp.Api.Controllers
 
         // GET: api/<UserController>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery]UserParams model)
         {
-            return Ok(await _userService.GetAllUserInformation());
+            var users = await _userService.GetAllUserInformation(model);
+
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPage);
+
+            return Ok(users);
         }
 
         // GET api/<UserController>/5

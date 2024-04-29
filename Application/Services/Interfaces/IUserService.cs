@@ -1,4 +1,5 @@
 ﻿using Domain.DTOs.Account;
+using Domain.DTOs.Common;
 using Domain.DTOs.User;
 using Domain.Entities.User;
 
@@ -22,7 +23,7 @@ namespace Application.Services.Interfaces
 
         Task<User?> GetUserByEmail(string email);
 
-        Task<List<MemberDTO>> GetAllUserInformation();
+        Task<PagedList<MemberDTO>> GetAllUserInformation(UserParams model);
 
         Task<MemberDTO> GetUserInformationByUserName(string userName);
 

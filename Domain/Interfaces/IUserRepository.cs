@@ -13,6 +13,8 @@ namespace Domain.Interfaces
 
         Task<IEnumerable<User>> GetAllUsers();
 
+        IQueryable<User> GetAllUsersAsQueryable();
+
         Task<User?> GetAllUserByUserId(int userId);
 
         Task<bool> CheckExistsingEmail(string email);

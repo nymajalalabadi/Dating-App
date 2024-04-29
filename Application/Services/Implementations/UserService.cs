@@ -4,6 +4,7 @@ using Application.Security.PasswordHelper;
 using Application.Senders.Mail;
 using Application.Services.Interfaces;
 using Domain.DTOs.Account;
+using Domain.DTOs.Common;
 using Domain.DTOs.Photo;
 using Domain.DTOs.User;
 using Domain.Entities.User;
@@ -118,18 +119,16 @@ namespace Application.Services.Implementations
             return await _userRepository.GetAllUsers();
         }
 
-
-
         public async Task<User?> GetUserByEmail(string email)
         {
             return await _userRepository.GetUserByEmail(email);
         }
 
-        public async Task<List<MemberDTO>> GetAllUserInformation()
+        public async Task<PagedList<MemberDTO>> GetAllUserInformation(UserParams model)
         {
-            var users = await _userRepository.GetAllUsers();
+            var users =  _userRepository.GetAllUsersAsQueryable();
 
-            return users.Select(u => new MemberDTO()
+            var usersQuery = users.Select(u => new MemberDTO()
             {
                 UserId = u.UserId,
                 PhotoUrl = $"https://localhost:7220/images/users/{u.Avatar}",
@@ -146,15 +145,15 @@ namespace Application.Services.Implementations
                 Mobile = u.Mobile,
                 RegisterDate = u.RegisterDate,
                 UserName = u.UserName,
-                Photos = u.Photos.Select(p => new PhotoDTO()
+                Photos = u.Photos.Select(p => new Domain.DTOs.Photo.PhotoDTO()
                 {
                     Id = p.Id,
                     IsMain = p.IsMain,
                     Url = p.Url
                 }).ToList()
-            }).ToList();
+            });
 
-
+            return await PagedList<MemberDTO>.CreateAsync(usersQuery, model.PageNumber, model.PageSize);
         }
 
         public async Task<MemberDTO?> GetUserInformationByUserName(string userName)
