@@ -19,6 +19,7 @@ namespace Domain.DTOs.Common
             AddRange(items);
         }
 
+
         public int CurrentPage { get; set; }
 
         public int TotalPage { get; set; }
@@ -26,6 +27,7 @@ namespace Domain.DTOs.Common
         public int PageSize { get; set; }
 
         public int TotalCount { get; set; }
+
 
         public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize)
         {
@@ -37,6 +39,5 @@ namespace Domain.DTOs.Common
 
             return new PagedList<T>(items, count, pageNumber, pageSize);
         }
-
     }
 }
