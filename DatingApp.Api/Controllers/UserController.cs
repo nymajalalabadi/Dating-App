@@ -29,6 +29,8 @@ namespace DatingApp.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery]UserParams model)
         {
+            model.UserId = User.GetUserId();
+
             var users = await _userService.GetAllUserInformation(model);
 
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPage);

@@ -126,9 +126,21 @@ namespace Application.Services.Implementations
 
         public async Task<PagedList<MemberDTO>> GetAllUserInformation(UserParams model)
         {
+            var user = await _userRepository.GetUserByUserId(model.UserId.Value);
+
             var users =  _userRepository.GetAllUsersAsQueryable();
 
-            var usersQuery = users.Select(u => new MemberDTO()
+            if (string.IsNullOrEmpty(model.Gender))
+            {
+                model.Gender = user.Gender;
+            }
+
+            var minAge = DateTime.Today.AddYears(- model.MinAge - 1);
+            var maxAge = DateTime.Today.AddYears(model.MaxAge);
+
+            var usersQuery = users
+                .Where(u => u.UserId != model.UserId && u.Gender == model.Gender && u.DateOfBirth >= minAge && u.DateOfBirth <= maxAge)
+                .Select(u => new MemberDTO()
             {
                 UserId = u.UserId,
                 PhotoUrl = $"https://localhost:7220/images/users/{u.Avatar}",

@@ -20,6 +20,12 @@ namespace Domain.DTOs.User
             set => _pageSize = (value > maxPageSize) ? maxPageSize : value;
         }
 
-    }
+        public int? UserId { get; set; }
 
+        public string? Gender { get; set; }
+
+        public int MinAge { get; set; } = 18;
+
+        public int MaxAge { get; set; } = 150;
+    }
 }
