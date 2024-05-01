@@ -14,6 +14,8 @@ namespace Domain.DTOs.User
 
         public string Token { get; set; }
 
+        public string Gender { get; set; }
+
         #endregion
     }
 

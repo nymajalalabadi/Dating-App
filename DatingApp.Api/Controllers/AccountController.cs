@@ -57,7 +57,8 @@ namespace DatingApp.Api.Controllers
                     return new JsonResult(new ResponseResult(true, "حساب کاربری شما با موفقیت ساخته شد.", new UserDTO
                     {
                         UserName = user.UserName,
-                        Token = _tokenService.CreateToken(user)
+                        Token = _tokenService.CreateToken(user),
+                        Gender = user.Gender
                     }));
 
                 case RegisterReuslt.Error:
@@ -97,7 +98,8 @@ namespace DatingApp.Api.Controllers
                     return new JsonResult(new ResponseResult(true, "شما با موفقیت وارد حساب کاربری خودتون شدید.", new UserDTO
                     {
                         UserName = user.UserName,
-                        Token = _tokenService.CreateToken(user)
+                        Token = _tokenService.CreateToken(user),
+                        Gender = user.Gender
                     }));
 
                 case LoginResult.Error:
